@@ -1,7 +1,7 @@
 # Netlify configuration for Yacin Gym App
 [build]
   publish = "dist"
-  command = "npm run build-no-errors"
+  command = "npm run build"
 
 [build.environment]
   NODE_VERSION = "20"

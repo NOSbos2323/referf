@@ -131,11 +131,11 @@ export default defineConfig({
       },
     },
     sourcemap: false,
-    minify: "esbuild",
+    minify: "terser",
     target: "es2020",
     cssCodeSplit: true,
     assetsInlineLimit: 8192,
-    reportCompressedSize: false,
+    reportCompressedSize: true,
   },
   server: {
     // @ts-ignore
