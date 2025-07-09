@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>غير متصل - Yacin Gym</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 500px;
+        background: rgba(30, 41, 59, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 40px;
+        border: 1px solid rgba(100, 116, 139, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 30px;
+        background: linear-gradient(45deg, #fbbf24, #3b82f6);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: bold;
+        color: #1e293b;
+      }
+
+      h1 {
+        font-size: 28px;
+        margin-bottom: 15px;
+        background: linear-gradient(45deg, #fbbf24, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        color: #cbd5e1;
+      }
+
+      .features {
+        text-align: right;
+        margin: 30px 0;
+      }
+
+      .features h3 {
+        color: #fbbf24;
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+
+      .features ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .features li {
+        padding: 8px 0;
+        color: #e2e8f0;
+        position: relative;
+        padding-right: 25px;
+      }
+
+      .features li:before {
+        content: "✓";
+        position: absolute;
+        right: 0;
+        color: #10b981;
+        font-weight: bold;
+      }
+
+      .retry-btn {
+        background: linear-gradient(45deg, #fbbf24, #3b82f6);
+        color: #1e293b;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        margin-top: 20px;
+      }
+
+      .retry-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3);
+      }
+
+      .status {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+
+      .status.online {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+      }
+
+      .pulse {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 30px 20px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        .logo {
+          width: 60px;
+          height: 60px;
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">YG</div>
+      <h1>Yacin Gym</h1>
+      <p>أنت تعمل حالياً في وضع عدم الاتصال</p>
+
+      <div class="features">
+        <h3>الميزات المتاحة بدون إنترنت:</h3>
+        <ul>
+          <li>عرض قائمة الأعضاء</li>
+          <li>تسجيل الحضور</li>
+          <li>إضافة أعضاء جدد</li>
+          <li>عرض المدفوعات</li>
+          <li>إدارة الاشتراكات</li>
+          <li>عرض التقارير</li>
+        </ul>
+      </div>
+
+      <div id="status" class="status">
+        <div class="pulse">🔴 غير متصل بالإنترنت</div>
+      </div>
+
+      <button class="retry-btn" onclick="checkConnection()">
+        التحقق من الاتصال
+      </button>
+      <button class="retry-btn" onclick="goToApp()" style="margin-right: 10px">
+        العودة للتطبيق
+      </button>
+    </div>
+
+    <script>
+      function checkConnection() {
+        const status = document.getElementById("status");
+
+        if (navigator.onLine) {
+          status.innerHTML = "<div>🟢 متصل بالإنترنت</div>";
+          status.className = "status online";
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 1000);
+        } else {
+          status.innerHTML = '<div class="pulse">🔴 لا يزال غير متصل</div>';
+          status.className = "status";
+        }
+      }
+
+      function goToApp() {
+        window.location.href = "/";
+      }
+
+      // Auto-check connection every 5 seconds
+      setInterval(() => {
+        if (navigator.onLine) {
+          const status = document.getElementById("status");
+          status.innerHTML = "<div>🟢 تم استعادة الاتصال</div>";
+          status.className = "status online";
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 2000);
+        }
+      }, 5000);
+
+      // Listen for online/offline events
+      window.addEventListener("online", () => {
+        const status = document.getElementById("status");
+        status.innerHTML = "<div>🟢 تم استعادة الاتصال</div>";
+        status.className = "status online";
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1500);
+      });
+
+      window.addEventListener("offline", () => {
+        const status = document.getElementById("status");
+        status.innerHTML = '<div class="pulse">🔴 انقطع الاتصال</div>';
+        status.className = "status";
+      });
+    </script>
+  </body>
+</html>

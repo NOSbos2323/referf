@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://your-domain.netlify.app/sitemap.xml
+
+# Optimize for search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Block access to admin areas (if any)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+
+# Allow important files
+Allow: /manifest.webmanifest
+Allow: /sw.js
