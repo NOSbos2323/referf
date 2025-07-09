@@ -131,25 +131,11 @@ export default defineConfig({
       },
     },
     sourcemap: false,
-    minify: "terser",
+    minify: "esbuild",
     target: "es2020",
     cssCodeSplit: true,
-    assetsInlineLimit: 8192, // Increased for better performance
-    reportCompressedSize: false, // Faster builds
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ["console.log", "console.info"],
-        passes: 2,
-      },
-      mangle: {
-        safari10: true,
-      },
-      format: {
-        comments: false,
-      },
-    },
+    assetsInlineLimit: 8192,
+    reportCompressedSize: false,
   },
   server: {
     // @ts-ignore
